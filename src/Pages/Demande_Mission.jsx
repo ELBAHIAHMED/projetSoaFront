@@ -7,16 +7,20 @@ function Demande_Mission() {
   const [name, setName] = useState('');
   const [date, setDate] = useState('');
   const [description, setDescription] = useState('');
+  const [msg, setMsg] = useState("");
+  const [showMsg, setShowMsg] = useState(false);
+
+
  
 
   const handleSubmit = async (e) => {
       e.preventDefault();
       const data = { name, date, description };
       try {
-          const response = await axios.post('https://your-server-url.com/post-route', data);
-          console.log(response.data);
+        const response = await axios.post('http://Localhost:8083/demandeMission', data);
+        console.log(response.data); setMsg(response.data); setShowMsg(true);
       } catch (error) {
-          console.error(error);
+        console.error(error); setShowMsg(false);
       }
       setName('');
       setDate('');
@@ -25,7 +29,7 @@ function Demande_Mission() {
   
   return (
     
-    <form onSubmit={handleSubmit}>
+    <form >
       <div className="input-zone ">
             <label className="input-label">Nom:</label>
             <input className="input-field w-1/2" type="text" value={name} onChange={e => setName(e.target.value)} />
@@ -59,6 +63,7 @@ function Demande_Mission() {
             >
               Submit
             </Button>
+      {showMsg && (<label className="input-label">{msg}</label>)}
     </form>
   );
 }

@@ -1,36 +1,43 @@
 import { Button } from '@mui/material';
 import React from 'react';
 import { Link } from 'react-router-dom';
-
-function Card({ item, handleModify }) {
+import { useNavigate } from 'react-router-dom';
+function Card({ item }) {
+    let navigate = useNavigate();
+    console.log(item);
     return (
         <div className="card">
             <div className="card-content">
-                <h2>{item.title}</h2>
-                <p>{item.date}</p>
-                <p>{item.description}</p>
+                <p>Nom:{item.nom}</p>
+                <p>Date:{item.date}</p>
+                <p>Description:{item.description}</p>
+                <p>Etat: {item.etat}</p>
+                <p>Retour: {item.retour}</p>
 
             </div>
             
-            <Link
-    to={{
-        pathname: "/modify-demande-remboursement",
-        state: { id: item.id, title: item.title, description: item.description, date: item.date }
-    }}
->
-    <Button
-        className="modify-btn"
-        sx={{
-            //backgroundColor: COLORS.myGreen,
-            backgroundColor: "#A9CAAA",
-            marginTop: "2px",
-            marginRight: "26px",
-            marginLeft: "auto",
-        }}
-    >
-        Modify
-    </Button>
-</Link>
+                <Button
+                className="modify-btn" onClick={() => navigate("/modify-demande-mission" + `?missionId=${item.iddemandeMission}`, {
+                        state: {
+                            item: item,
+                            id:item.id
+
+
+                        }
+                    })}
+                    sx={{
+                        //backgroundColor: COLORS.myGreen,
+                        backgroundColor: "#A9CAAA",
+                        marginTop: "2px",
+                        marginRight: "26px",
+                        marginLeft: "auto",
+                    }}
+                >
+                    Modify
+                </Button>
+                
+
+                          
 
         </div>
     );

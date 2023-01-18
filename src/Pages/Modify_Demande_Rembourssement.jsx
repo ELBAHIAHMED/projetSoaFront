@@ -30,7 +30,7 @@ console.log(props);
   
     <form onSubmit={handleSubmit}>
       <div className="input-zone ">
-            <label className="input-label">Nom:</label>
+            <label className="input-label">ahmed:</label>
             <input className="input-field w-1/2" type="text" value={name} onChange={e => setName(e.target.value)} />
         </div>
       <br />
